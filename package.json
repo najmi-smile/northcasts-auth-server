@@ -1,0 +1,30 @@
+{
+  "name": "github-auth-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.1",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
+    "express-partials": "^0.3.0",
+    "express-session": "^1.15.5",
+    "github": "^11.0.0",
+    "jwt-simple": "^0.5.1",
+    "mongoose": "^4.11.11",
+    "passport": "^0.4.0",
+    "passport-github2": "^0.1.10"
+  },
+  "devDependencies": {
+    "eslint": "^4.6.1"
+  }
+}
