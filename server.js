@@ -1,21 +1,27 @@
-const path = require('path');
 const express = require('express');
-const partials = require('express-partials');
-const bodyParser = require('body-parser');
-const session = require('express-session');
-const router = require('./routes');
-const passport = require('./services/passport');
+const next = require('next');
 
-const app = express();
+require('dotenv').config();
+const {PORT} = process.env;
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.use(partials());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(router);
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
-module.exports = app;
+app.prepare()
+  .then(() => {
+    const server = express();
+
+    server.get('/a', (req, res) => {
+      return app.render(req, res, '/a');
+    });
+
+    server.get('*', (req, res) => {
+      return handle(req, res);
+    });
+  
+    server.listen(PORT, (err) => {
+      if (err) throw err;
+      console.log(`> Ready on http://localhost:${PORT}`);
+    });
+  });
