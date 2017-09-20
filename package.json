@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node server.js",
+    "prestart": "npm run build",
     "start": "NODE_ENV=production node index.js",
     "build": "next build"
   },
